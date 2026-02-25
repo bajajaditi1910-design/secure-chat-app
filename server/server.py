@@ -1,8 +1,8 @@
 import socket
 import threading
 
-HOST = '127.0.0.1'   # localhost
-PORT = 5000          # port number
+HOST = '127.0.0.1'
+PORT = 5000
 
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 server.bind((HOST, PORT))
@@ -11,6 +11,16 @@ server.listen()
 clients = []
 
 print(f"[SERVER] Running on {HOST}:{PORT}")
+
+def broadcast(message, sender):
+    for client in clients:
+        if client != sender:
+            try:
+                client.send(message)
+            except:
+                client.close()
+                if client in clients:
+                    clients.remove(client)
 
 def handle_client(client):
     while True:
@@ -22,21 +32,26 @@ def handle_client(client):
         except:
             break
 
-    clients.remove(client)
+    if client in clients:
+        clients.remove(client)
     client.close()
+    print("[DISCONNECTED] Client removed")
 
-def broadcast(message, sender):
-    for client in clients:
-        if client != sender:
-            client.send(message)
-
-def receive_connections():
+def accept_connections():
     while True:
-        client, address = server.accept()
-        print(f"[CONNECTED] {address}")
+        client, addr = server.accept()
+        print(f"[CONNECTED] {addr}")
         clients.append(client)
 
-        thread = threading.Thread(target=handle_client, args=(client,))
-        thread.start()
+        # Send READY whenever 2 or more clients exist
+        if len(clients) >= 2:
+            print("[SERVER] Sending READY to all clients.")
+            for c in clients:
+                try:
+                    c.send(b"READY")
+                except:
+                    pass
 
-receive_connections()
+        threading.Thread(target=handle_client, args=(client,), daemon=True).start()
+
+accept_connections()

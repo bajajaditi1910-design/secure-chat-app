@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Secure End-to-End Encrypted Chat Application using Diffie-Hellman, AES, and HMAC">
+    <title>Secure Chat Application</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- Navigation -->
+<nav class="navbar">
+    <div class="container nav-container">
+        <div class="logo">
+            <svg class="shield-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+            </svg>
+            <span>SecureChat</span>
+        </div>
+
+        <a href="https://github.com/bajajaditi1910-design/secure-chat-app"
+           target="_blank" class="github-btn">
+            View on GitHub
+        </a>
+    </div>
+</nav>
+
+<!-- Hero -->
+<header class="hero">
+    <div class="hero-background"></div>
+    <div class="container hero-content">
+        <div class="badge">🔒 End-to-End Encrypted</div>
+        <h1 class="hero-title">Secure Chat Application</h1>
+        <p class="hero-description">
+            A Python-based secure messaging system implementing Diffie-Hellman
+            key exchange, AES encryption, HMAC integrity checks, and a zero-trust
+            relay server.
+        </p>
+
+        <div class="hero-buttons">
+            <a href="#features" class="btn btn-primary">Explore Features</a>
+            <a href="#screenshots" class="btn btn-secondary">View Screenshots</a>
+        </div>
+    </div>
+</header>
+
+<!-- Features -->
+<section id="features" class="features">
+    <div class="container">
+        <div class="section-title-center">
+            <h2>Security Features</h2>
+            <p>Industry-standard cryptographic protections</p>
+        </div>
+
+        <div class="features-grid">
+            <div class="feature-card">
+                <h3>Diffie-Hellman Key Exchange</h3>
+                <p>Secure session key establishment with perfect forward secrecy.</p>
+            </div>
+
+            <div class="feature-card">
+                <h3>AES-256 Encryption</h3>
+                <p>All messages encrypted using AES in CBC mode.</p>
+            </div>
+
+            <div class="feature-card">
+                <h3>HMAC Integrity</h3>
+                <p>SHA-256 HMAC verification to prevent tampering.</p>
+            </div>
+
+            <div class="feature-card">
+                <h3>Zero-Trust Server</h3>
+                <p>Server acts only as a blind relay with no access to plaintext.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Screenshots -->
+<section id="screenshots" class="screenshots">
+    <div class="container">
+        <div class="section-title-center">
+            <h2>Screenshots</h2>
+            <p>Secure handshake and server execution proof</p>
+        </div>
+
+        <div class="card">
+            <div class="screenshots-grid">
+
+                <div class="screenshot-item">
+                    <div class="screenshot-frame">
+                        <img src="screenshots/server.png" alt="Server Running">
+                    </div>
+                    <p class="screenshot-caption">
+                        Blind Relay Server Running on 127.0.0.1:5000
+                    </p>
+                </div>
+
+                <div class="screenshot-item">
+                    <div class="screenshot-frame">
+                        <img src="screenshots/initiator-handshake.png" alt="Initiator Handshake">
+                    </div>
+                    <p class="screenshot-caption">
+                        Client 1 (Initiator) – Secure Handshake
+                    </p>
+                </div>
+
+                <div class="screenshot-item">
+                    <div class="screenshot-frame">
+                        <img src="screenshots/responder-handshake.png" alt="Responder Handshake">
+                    </div>
+                    <p class="screenshot-caption">
+                        Client 2 (Responder) – Secure Handshake
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="container footer-content">
+        <span>Secure Chat Application © 2026</span>
+        <a href="https://github.com/bajajaditi1910-design/secure-chat-app"
+           target="_blank">Source Code</a>
+    </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

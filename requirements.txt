@@ -1,4 +1,2 @@
-cryptography
 websockets
-flask
-flask-socketio
+cryptography

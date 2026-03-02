@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SecureChat - End-to-End Encrypted Chat Application</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                </svg>
+                <span>SecureChat</span>
+            </div>
+            <div class="nav-links">
+                <a href="#features">Features</a>
+                <a href="#architecture">Architecture</a>
+                <a href="#demo">Demo</a>
+                <a href="https://github.com/bajajaditi1910-design/secure-chat-app" target="_blank" class="github-link">
+                    <svg class="icon" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                    </svg>
+                    GitHub
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="badge">
+                    <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                        <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                    </svg>
+                    End-to-End Encrypted
+                </div>
+                <h1>Secure End-to-End Encrypted Chat Application</h1>
+                <p class="hero-description">
+                    A Python-based secure messaging system featuring Diffie-Hellman key exchange, 
+                    AES-128 encryption, HMAC integrity verification, and zero-trust blind relay architecture.
+                </p>
+                <div class="hero-buttons">
+                    <a href="#demo" class="btn btn-primary">
+                        <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <polygon points="5 3 19 12 5 21 5 3"/>
+                        </svg>
+                        View Demo
+                    </a>
+                    <a href="https://github.com/bajajaditi1910-design/secure-chat-app" target="_blank" class="btn btn-secondary">
+                        View Source
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <h2>Security Features</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <circle cx="12" cy="12" r="3"/>
+                            <path d="M12 1v6m0 6v6m5.2-13.2l-4.2 4.2m0 6l4.2 4.2M23 12h-6m-6 0H1m18.2 5.2l-4.2-4.2m0-6l4.2-4.2"/>
+                        </svg>
+                    </div>
+                    <h3>Diffie-Hellman Key Exchange</h3>
+                    <p>Establishes shared secret between clients without transmitting the key over the network.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                            <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                        </svg>
+                    </div>
+                    <h3>AES-128 Encryption</h3>
+                    <p>Military-grade symmetric encryption with CBC mode and PKCS7 padding for message confidentiality.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                        </svg>
+                    </div>
+                    <h3>HMAC Integrity</h3>
+                    <p>SHA-256 based message authentication code ensures messages haven't been tampered with.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <rect x="2" y="7" width="20" height="14" rx="2" ry="2"/>
+                            <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
+                        </svg>
+                    </div>
+                    <h3>Zero-Trust Server</h3>
+                    <p>Blind relay server cannot decrypt messages. True end-to-end encryption with client-side keys.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Architecture Section -->
+    <section id="architecture" class="architecture">
+        <div class="container">
+            <h2>System Architecture</h2>
+            
+            <div class="architecture-diagram">
+                <div class="arch-node">
+                    <div class="arch-icon client">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                            <circle cx="12" cy="7" r="4"/>
+                        </svg>
+                    </div>
+                    <h4>Client 1</h4>
+                    <p>Initiator</p>
+                </div>
+
+                <div class="arch-arrow">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <line x1="5" y1="12" x2="19" y2="12"/>
+                        <polyline points="15 8 19 12 15 16"/>
+                        <polyline points="9 8 5 12 9 16"/>
+                    </svg>
+                    <span>Encrypted Messages</span>
+                </div>
+
+                <div class="arch-node">
+                    <div class="arch-icon server">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <rect x="2" y="2" width="20" height="8" rx="2" ry="2"/>
+                            <rect x="2" y="14" width="20" height="8" rx="2" ry="2"/>
+                            <line x1="6" y1="6" x2="6.01" y2="6"/>
+                            <line x1="6" y1="18" x2="6.01" y2="18"/>
+                        </svg>
+                    </div>
+                    <h4>Relay Server</h4>
+                    <p>Zero-Trust</p>
+                </div>
+
+                <div class="arch-arrow">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <line x1="5" y1="12" x2="19" y2="12"/>
+                        <polyline points="15 8 19 12 15 16"/>
+                        <polyline points="9 8 5 12 9 16"/>
+                    </svg>
+                    <span>Encrypted Messages</span>
+                </div>
+
+                <div class="arch-node">
+                    <div class="arch-icon client">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                            <circle cx="12" cy="7" r="4"/>
+                        </svg>
+                    </div>
+                    <h4>Client 2</h4>
+                    <p>Responder</p>
+                </div>
+            </div>
+
+            <div class="tech-stack">
+                <h3>Technology Stack</h3>
+                <div class="tech-grid">
+                    <div class="tech-item">
+                        <strong>Language:</strong> Python 3.x
+                    </div>
+                    <div class="tech-item">
+                        <strong>Networking:</strong> TCP Sockets
+                    </div>
+                    <div class="tech-item">
+                        <strong>Crypto Library:</strong> cryptography.io
+                    </div>
+                    <div class="tech-item">
+                        <strong>Threading:</strong> Python threading
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Encryption Flow Section -->
+    <section class="encryption-flow">
+        <div class="container">
+            <h2>Encryption Flow</h2>
+            <div class="flow-steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h4>Connection Establishment</h4>
+                        <p>Both clients connect to the relay server via TCP socket on port 5000.</p>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h4>Ready Signal</h4>
+                        <p>Server sends "READY" signal when two or more clients are connected.</p>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h4>Key Generation</h4>
+                        <p>Each client generates a Diffie-Hellman private/public key pair using 2048-bit parameters.</p>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h4>Public Key Exchange</h4>
+                        <p>Clients exchange public keys through the server. Initiator sends first, responder replies.</p>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">5</div>
+                    <div class="step-content">
+                        <h4>Shared Secret Computation</h4>
+                        <p>Both clients compute the same shared secret using their private key and peer's public key.</p>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">6</div>
+                    <div class="step-content">
+                        <h4>Key Derivation</h4>
+                        <p>SHA-256 hash of shared secret generates master key. Split into AES key (16 bytes) and HMAC key (16 bytes).</p>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">7</div>
+                    <div class="step-content">
+                        <h4>Message Encryption</h4>
+                        <p>Messages encrypted with AES-128-CBC, random IV per message. HMAC-SHA256 appended for integrity.</p>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">8</div>
+                    <div class="step-content">
+                        <h4>Secure Communication</h4>
+                        <p>Encrypted messages relayed through server. Only intended recipient can decrypt and verify.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Demo Section -->
+    <section id="demo" class="demo-section">
+        <div class="container">
+            <h2>Application Screenshots</h2>
+            <p class="section-subtitle">Complete end-to-end encrypted chat flow demonstration</p>
+            
+            <div class="tabs">
+                <button class="tab-btn active" data-tab="handshake">Key Exchange</button>
+                <button class="tab-btn" data-tab="server">Server Running</button>
+                <button class="tab-btn" data-tab="chat">Encrypted Chat</button>
+            </div>
+
+            <div class="tab-content">
+                <div class="tab-pane active" id="handshake">
+                    <div class="screenshot-placeholder">
+                        <svg class="placeholder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <circle cx="12" cy="12" r="3"/>
+                            <path d="M12 1v6m0 6v6m5.2-13.2l-4.2 4.2m0 6l4.2 4.2M23 12h-6m-6 0H1m18.2 5.2l-4.2-4.2m0-6l4.2-4.2"/>
+                        </svg>
+                        <h3>Diffie-Hellman Handshake</h3>
+                        <p>Screenshots showing the secure key exchange process between Client 1 and Client 2</p>
+                        <div class="placeholder-note">
+                            Replace this placeholder with your actual screenshot:<br>
+                            <code>&lt;img src="screenshots/handshake.png" alt="Key Exchange"&gt;</code>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-pane" id="server">
+                    <div class="screenshot-placeholder">
+                        <svg class="placeholder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <rect x="2" y="2" width="20" height="8" rx="2" ry="2"/>
+                            <rect x="2" y="14" width="20" height="8" rx="2" ry="2"/>
+                            <line x1="6" y1="6" x2="6.01" y2="6"/>
+                            <line x1="6" y1="18" x2="6.01" y2="18"/>
+                        </svg>
+                        <h3>Server Console</h3>
+                        <p>Server running and accepting client connections with READY signal broadcast</p>
+                        <div class="placeholder-note">
+                            Replace this placeholder with your actual screenshot:<br>
+                            <code>&lt;img src="screenshots/server.png" alt="Server Running"&gt;</code>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-pane" id="chat">
+                    <div class="screenshot-placeholder">
+                        <svg class="placeholder-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                        </svg>
+                        <h3>Encrypted Chat Session</h3>
+                        <p>Two clients exchanging encrypted messages with HMAC verification</p>
+                        <div class="placeholder-note">
+                            Replace this placeholder with your actual screenshot:<br>
+                            <code>&lt;img src="screenshots/chat.png" alt="Encrypted Chat"&gt;</code>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="demo-features">
+                <div class="demo-feature">
+                    <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <polyline points="20 6 9 17 4 12"/>
+                    </svg>
+                    Real-time messaging
+                </div>
+                <div class="demo-feature">
+                    <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <polyline points="20 6 9 17 4 12"/>
+                    </svg>
+                    Perfect forward secrecy
+                </div>
+                <div class="demo-feature">
+                    <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <polyline points="20 6 9 17 4 12"/>
+                    </svg>
+                    Message integrity verification
+                </div>
+                <div class="demo-feature">
+                    <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <polyline points="20 6 9 17 4 12"/>
+                    </svg>
+                    Zero server knowledge
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Installation Section -->
+    <section class="installation">
+        <div class="container">
+            <h2>Quick Start</h2>
+            
+            <div class="install-grid">
+                <div class="install-card">
+                    <h3>1. Clone Repository</h3>
+                    <div class="code-block">
+                        <code>git clone https://github.com/bajajaditi1910-design/secure-chat-app.git
+cd secure-chat-app</code>
+                    </div>
+                </div>
+
+                <div class="install-card">
+                    <h3>2. Install Dependencies</h3>
+                    <div class="code-block">
+                        <code>pip install cryptography</code>
+                    </div>
+                </div>
+
+                <div class="install-card">
+                    <h3>3. Start Server</h3>
+                    <div class="code-block">
+                        <code>python chat-server.py</code>
+                    </div>
+                </div>
+
+                <div class="install-card">
+                    <h3>4. Launch Clients</h3>
+                    <div class="code-block">
+                        <code>python secure-chat-client.py
+# Run in 2+ terminals</code>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>SecureChat</h4>
+                    <p>End-to-end encrypted messaging with zero-trust architecture.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <a href="#features">Features</a>
+                    <a href="#architecture">Architecture</a>
+                    <a href="#demo">Demo</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <a href="https://github.com/bajajaditi1910-design/secure-chat-app" target="_blank">GitHub</a>
+                    <a href="https://cryptography.io" target="_blank">Cryptography Library</a>
+                    <a href="https://en.wikipedia.org/wiki/Diffie%E2%80%93Hellman_key_exchange" target="_blank">Diffie-Hellman</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 SecureChat. Built with Python & Cryptography.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

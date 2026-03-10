@@ -10,7 +10,7 @@ import socket
 import json
 import threading
 from datetime import datetime
-from crypto_utils import CryptoManager
+from backend.crypto_utils import CryptoManager
 
 # Configuration
 WS_HOST = '0.0.0.0'

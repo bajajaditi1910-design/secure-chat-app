@@ -2,29 +2,28 @@
 """
 WebSocket Bridge for SecureChat
 Bridges WebSocket clients (browser) to TCP Socket Server (Python backend)
+Updated for Cloud Deployment (Render/Railway)
 """
 
 import asyncio
 import websockets
 import socket
 import json
-import threading
+import os
 from datetime import datetime
 from backend.crypto_utils import CryptoManager
 
-# Configuration
+# Configuration - Updated for Render compatibility
 WS_HOST = '0.0.0.0'
-WS_PORT = 8000
+# Render provides a port via the PORT environment variable
+WS_PORT = int(os.environ.get("PORT", 8000))
+
+# For the 'Sidecar' method, TCP server runs on the same instance
 TCP_HOST = '127.0.0.1'
 TCP_PORT = 5000
 
 # Store WebSocket clients
 ws_clients = {}
-# Store TCP socket connections
-tcp_connections = {}
-# Store crypto managers per client
-crypto_managers = {}
-
 
 class TCPBridge:
     """Bridges a WebSocket client to the TCP server"""
@@ -78,27 +77,22 @@ class TCPBridge:
                 
                 # Check if it's a public key (PEM format)
                 if b'BEGIN PUBLIC KEY' in data:
-                    # Store peer's public key
                     peer_public_key = data.decode('utf-8')
                     self.crypto.set_peer_public_key(peer_public_key)
-                    
-                    # Compute shared secret
                     shared_secret = self.crypto.compute_shared_secret()
                     
                     await self.send_to_websocket({
                         'type': 'public_key',
                         'data': {
                             'publicKey': peer_public_key,
-                            'sharedSecret': shared_secret[:32] + '...'  # Partial for display
+                            'sharedSecret': shared_secret[:32] + '...' 
                         }
                     })
                     continue
                 
-                # Otherwise it's an encrypted message
+                # Decrypt message
                 try:
-                    # Decrypt the message
                     plaintext = self.crypto.decrypt_message(data)
-                    
                     await self.send_to_websocket({
                         'type': 'message',
                         'sender': 'peer',
@@ -139,7 +133,6 @@ class TCPBridge:
             except:
                 pass
 
-
 async def handle_websocket(websocket, path):
     """Handle WebSocket connections"""
     client_id = None
@@ -154,26 +147,16 @@ async def handle_websocket(websocket, path):
                 msg_type = data.get('type')
                 
                 if msg_type == 'handshake':
-                    # Initialize client
                     client_id = data['data']['clientId']
-                    client_public_key = data['data']['publicKey']
-                    
-                    print(f"[{datetime.now()}] Handshake from {client_id}")
-                    
-                    # Create bridge to TCP server
                     bridge = TCPBridge(client_id, websocket)
                     ws_clients[client_id] = bridge
                     
-                    # Generate crypto keys
                     bridge.crypto.generate_keys()
                     
-                    # Connect to TCP server
                     if await bridge.connect_to_tcp():
-                        # Send our public key to TCP server
                         our_public_key = bridge.crypto.get_public_key_pem()
                         await bridge.send_to_tcp(our_public_key.encode('utf-8'))
                         
-                        # Send confirmation to WebSocket
                         await bridge.send_to_websocket({
                             'type': 'handshake_ack',
                             'message': 'Connected to server'
@@ -185,17 +168,10 @@ async def handle_websocket(websocket, path):
                         }))
                 
                 elif msg_type == 'message':
-                    # Encrypt and send message
                     if bridge and bridge.running:
                         plaintext = data['data']['text']
-                        
-                        # Encrypt the message
                         encrypted_data = bridge.crypto.encrypt_message(plaintext)
-                        
-                        # Send to TCP server
                         await bridge.send_to_tcp(encrypted_data)
-                        
-                        print(f"[{datetime.now()}] Relayed encrypted message from {client_id}")
                 
                 elif msg_type == 'ping':
                     await websocket.send(json.dumps({'type': 'pong'}))
@@ -208,33 +184,25 @@ async def handle_websocket(websocket, path):
     except websockets.exceptions.ConnectionClosed:
         print(f"[{datetime.now()}] WebSocket connection closed")
     finally:
-        # Cleanup
-        if client_id and client_id in ws_clients:
+        if client_id in ws_clients:
             del ws_clients[client_id]
         if bridge:
             bridge.disconnect()
 
-
 async def main():
     """Start the WebSocket bridge server"""
     print("=" * 70)
-    print("SecureChat WebSocket Bridge")
+    print("SecureChat WebSocket Bridge - PRODUCTION READY")
     print("=" * 70)
-    print(f"WebSocket Server: ws://{WS_HOST}:{WS_PORT}")
-    print(f"TCP Server: {TCP_HOST}:{TCP_PORT}")
-    print(f"Time: {datetime.now()}")
+    print(f"WebSocket Server: 0.0.0.0:{WS_PORT}")
+    print(f"TCP Target: {TCP_HOST}:{TCP_PORT}")
     print("=" * 70)
-    print("\n⚠️  Make sure the TCP server (chat-server.py) is running on port 5000")
-    print("\nWaiting for connections...\n")
     
     async with websockets.serve(handle_websocket, WS_HOST, WS_PORT):
-        await asyncio.Future()  # Run forever
-
+        await asyncio.Future()
 
 if __name__ == "__main__":
     try:
         asyncio.run(main())
     except KeyboardInterrupt:
-        print("\n\nBridge server stopped by user")
-    except Exception as e:
-        print(f"\n\nBridge server error: {e}")
+        print("\nBridge server stopped")

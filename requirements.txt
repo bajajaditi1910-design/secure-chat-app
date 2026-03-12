@@ -1,2 +1,2 @@
-websockets
-asyncio
+cryptography>=42.0.0
+websockets>=12.0

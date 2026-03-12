@@ -18,73 +18,82 @@ function revealOnScroll() {
 
 function initSmoothScroll() {
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-
         anchor.addEventListener("click", function (e) {
-
             const href = this.getAttribute("href");
-
             if (href === "#") return;
-
             e.preventDefault();
-
             const targetElement = document.querySelector(href);
-
             if (targetElement) {
                 targetElement.scrollIntoView({
                     behavior: "smooth",
                     block: "start"
                 });
             }
-
         });
-
     });
 }
 
 function initNavbarScroll() {
-
     const navbar = document.querySelector(".navbar");
-
     window.addEventListener("scroll", () => {
-
         if (window.scrollY > 50) {
             navbar.style.boxShadow = "0 4px 6px rgba(0,0,0,0.3)";
         } else {
             navbar.style.boxShadow = "none";
         }
-
     });
-
 }
 
 // ============================================
-// USER SYSTEM
+// SECURE CHAT SYSTEM (WEBSOCKET & PERSISTENCE)
 // ============================================
 
+// UPDATE: When you deploy to Render, change 'ws://localhost:8000' to 'wss://your-app.onrender.com'
+const socket = new WebSocket('ws://localhost:8000'); 
 const DEVICE_USER_KEY = "securechat_device_user";
-const USERS_KEY = "securechat_users";
 
-// get device username
-function getCurrentUser() {
-    return localStorage.getItem(DEVICE_USER_KEY);
-}
+let myUsername = localStorage.getItem(DEVICE_USER_KEY);
 
-// get all users
-function getUsers() {
-    return JSON.parse(localStorage.getItem(USERS_KEY)) || [];
-}
+socket.onopen = () => {
+    console.log("Connected to Secure Backend");
+    // AUTO-LOGIN: If this device has a saved name, send it to the server immediately
+    if (myUsername) {
+        socket.send(JSON.stringify({ type: "login", username: myUsername }));
+    }
+};
 
-// save users
-function saveUsers(users) {
-    localStorage.setItem(USERS_KEY, JSON.stringify(users));
-}
+socket.onmessage = (event) => {
+    const data = JSON.parse(event.data);
+
+    if (data.type === "login_success") {
+        myUsername = data.username;
+        localStorage.setItem(DEVICE_USER_KEY, myUsername); // Fix name to this device
+        
+        // UI: You can trigger a transition here to hide the login screen
+        console.log("Identity fixed to device: " + myUsername);
+    } 
+
+    else if (data.type === "error") {
+        alert(data.message);
+        // Optional: clear cache if the server rejects the name
+        // localStorage.removeItem(DEVICE_USER_KEY);
+    }
+
+    else if (data.type === "user_list") {
+        updateOnlineUsersList(data.users);
+    }
+
+    else if (data.type === "chat") {
+        // This is where your AES-128 / HMAC logic will process incoming messages
+        console.log("Encrypted message received");
+    }
+};
 
 // ============================================
-// ENTER CHAT
+// ENTER CHAT (MERGED LOGIC)
 // ============================================
 
 function enterChat() {
-
     const usernameInput = document.getElementById("username").value.trim();
 
     if (!usernameInput) {
@@ -92,161 +101,62 @@ function enterChat() {
         return;
     }
 
-    const deviceUser = getCurrentUser();
+    const deviceUser = localStorage.getItem(DEVICE_USER_KEY);
 
-    if (deviceUser) {
-        alert("This device already registered as: " + deviceUser);
+    // If this device already has a different name, prevent changing it
+    if (deviceUser && deviceUser !== usernameInput) {
+        alert("This device is already registered as: " + deviceUser);
         return;
     }
 
-    let users = getUsers();
-
-    const existing = users.find(u => u.name === usernameInput);
-
-    if (existing) {
-        alert("Username already used. Try different username.");
-        return;
-    }
-
-    const newUser = {
-        name: usernameInput,
-        status: "online",
-        lastSeen: Date.now()
-    };
-
-    users.push(newUser);
-
-    saveUsers(users);
-
-    localStorage.setItem(DEVICE_USER_KEY, usernameInput);
-
-    loadOnlineUsers();
-
+    // Send login request to the server to check for global duplicates
+    socket.send(JSON.stringify({
+        type: "login",
+        username: usernameInput
+    }));
 }
 
 // ============================================
-// ONLINE USERS DISPLAY
+// ONLINE USERS DISPLAY (UI)
 // ============================================
 
-function loadOnlineUsers() {
-
-    const list = document.getElementById("onlineUsers");
-
+function updateOnlineUsersList(users) {
+    const list = document.getElementById("onlineUsers"); // Ensure this ID matches your HTML
     if (!list) return;
-
-    const users = getUsers();
-
-    const currentUser = getCurrentUser();
 
     list.innerHTML = "";
 
-    users.forEach(user => {
-
+    users.forEach(username => {
         const li = document.createElement("li");
 
-        let text = user.name;
-
-        if (user.name === currentUser) {
-            text += " (you)";
+        // The "(you)" logic for the specific device
+        if (username === myUsername) {
+            li.innerHTML = `<span class="user-me"><strong>${username} (you)</strong></span>`;
+            li.style.color = "#4CAF50"; 
+        } else {
+            li.textContent = username;
         }
-
-        text += " - " + user.status;
-
-        li.textContent = text;
-
+        
         list.appendChild(li);
-
     });
-
 }
 
 // ============================================
-// STATUS SYSTEM
-// ============================================
-
-function setBusy() {
-
-    let users = getUsers();
-
-    const currentUser = getCurrentUser();
-
-    users.forEach(user => {
-
-        if (user.name === currentUser) {
-            user.status = "busy";
-            user.lastSeen = Date.now();
-        }
-
-    });
-
-    saveUsers(users);
-
-    loadOnlineUsers();
-
-}
-
-function setAvailable() {
-
-    let users = getUsers();
-
-    const currentUser = getCurrentUser();
-
-    users.forEach(user => {
-
-        if (user.name === currentUser) {
-            user.status = "online";
-            user.lastSeen = Date.now();
-        }
-
-    });
-
-    saveUsers(users);
-
-    loadOnlineUsers();
-
-}
-
-// ============================================
-// REMOVE INACTIVE USERS
-// ============================================
-
-function cleanupInactiveUsers() {
-
-    let users = getUsers();
-
-    const now = Date.now();
-
-    users = users.filter(user => {
-
-        return now - user.lastSeen < 600000; // 10 minutes
-
-    });
-
-    saveUsers(users);
-
-    loadOnlineUsers();
-
-}
-
-// run cleanup every minute
-setInterval(cleanupInactiveUsers, 60000);
-
-// ============================================
-// INITIALIZE WEBSITE
+// INITIALIZE WEBSITE (YOUR ORIGINAL DOM LOAD)
 // ============================================
 
 document.addEventListener("DOMContentLoaded", () => {
-
+    // Run your original animations
     initSmoothScroll();
-
     initNavbarScroll();
-
     window.addEventListener("scroll", revealOnScroll);
-
     revealOnScroll();
 
-    loadOnlineUsers();
-
-    console.log("SecureChat website loaded");
-
+    console.log("SecureChat Website & Secure System Loaded");
 });
+function resetDeviceIdentity() {
+    if(confirm("This will clear your username from this device. Continue?")) {
+        localStorage.removeItem("securechat_device_user");
+        location.reload(); // Refresh to show login screen again
+    }
+}

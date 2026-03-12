@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Navigation -->
     <nav class="navbar">
         <div class="container nav-container">
             <div class="logo">
@@ -26,7 +25,6 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
     <header class="hero">
         <div class="hero-background"></div>
         <div class="container hero-content">
@@ -55,10 +53,9 @@
         </div>
     </header>
 
-    <!-- About Section -->
     <section class="about">
         <div class="container">
-            <div class="card">
+            <div class="card reveal">
                 <div class="section-header">
                     <svg class="shield-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
@@ -78,16 +75,14 @@
         </div>
     </section>
 
-    <!-- Security Features Section -->
     <section id="features" class="features">
         <div class="container">
-            <div class="section-title-center">
+            <div class="section-title-center reveal">
                 <h2>Security Features</h2>
                 <p>Industry-standard cryptographic protocols</p>
             </div>
             <div class="features-grid">
-                <!-- Feature 1: Diffie-Hellman -->
-                <div class="feature-card">
+                <div class="feature-card reveal">
                     <div class="feature-header">
                         <div class="feature-icon icon-cyan">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -97,14 +92,10 @@
                         </div>
                         <h3>Diffie-Hellman Key Exchange</h3>
                     </div>
-                    <p>
-                        Secure key establishment protocol that allows two parties to establish a shared secret over an 
-                        insecure channel. Each client generates ephemeral key pairs for perfect forward secrecy.
-                    </p>
+                    <p>Secure key establishment protocol that allows two parties to establish a shared secret over an insecure channel.</p>
                 </div>
 
-                <!-- Feature 2: AES Encryption -->
-                <div class="feature-card">
+                <div class="feature-card reveal">
                     <div class="feature-header">
                         <div class="feature-icon icon-purple">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -114,14 +105,10 @@
                         </div>
                         <h3>AES Encryption</h3>
                     </div>
-                    <p>
-                        Advanced Encryption Standard (AES) in CBC mode with PKCS7 padding. All messages are encrypted 
-                        with 256-bit keys, providing military-grade protection for your conversations.
-                    </p>
+                    <p>Advanced Encryption Standard (AES) in CBC mode. All messages are encrypted with 256-bit keys for military-grade protection.</p>
                 </div>
 
-                <!-- Feature 3: HMAC -->
-                <div class="feature-card">
+                <div class="feature-card reveal">
                     <div class="feature-header">
                         <div class="feature-icon icon-blue">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -129,283 +116,78 @@
                                 <polyline points="22 4 12 14.01 9 11.01"></polyline>
                             </svg>
                         </div>
-                        <h3>HMAC Integrity Verification</h3>
+                        <h3>HMAC Integrity</h3>
                     </div>
-                    <p>
-                        Hash-based Message Authentication Code (HMAC) using SHA-256 ensures message integrity and 
-                        authenticity, protecting against tampering and man-in-the-middle attacks.
-                    </p>
+                    <p>Hash-based Message Authentication Code (HMAC) ensures message integrity and authenticity, protecting against tampering.</p>
                 </div>
 
-                <!-- Feature 4: Zero-Trust Server -->
-                <div class="feature-card">
+                <div class="feature-card reveal">
                     <div class="feature-header">
                         <div class="feature-icon icon-green">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect>
                                 <rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect>
-                                <line x1="6" y1="6" x2="6.01" y2="6"></line>
-                                <line x1="6" y1="18" x2="6.01" y2="18"></line>
                             </svg>
                         </div>
-                        <h3>Zero-Trust / Blind Relay Server</h3>
+                        <h3>Blind Relay Server</h3>
                     </div>
-                    <p>
-                        The relay server has zero knowledge of message contents. All encryption and decryption happens 
-                        on client devices, ensuring true end-to-end encryption with no server-side access.
-                    </p>
+                    <p>The relay server has zero knowledge of message contents. All encryption and decryption happens on client devices.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Encryption Flow Section -->
-    <section class="encryption-flow">
+    <section id="chat" class="chat-section">
         <div class="container">
-            <div class="card card-gradient">
+            <div class="card card-gradient reveal">
                 <div class="section-title-center">
-                    <h2>Encryption Flow</h2>
-                    <p>Step-by-step message encryption process</p>
+                    <h2>Live Secure Chat</h2>
+                    <p>Identity is fixed to this device once joined.</p>
                 </div>
-                <div class="flow-steps">
-                    <!-- Step 1 -->
-                    <div class="flow-step">
-                        <div class="step-number">1</div>
-                        <div class="step-content">
-                            <h3>Key Exchange Initialization</h3>
-                            <p>Both clients generate their Diffie-Hellman key pairs (private and public keys) using secure random number generation.</p>
-                        </div>
-                    </div>
 
-                    <!-- Step 2 -->
-                    <div class="flow-step">
-                        <div class="step-number">2</div>
-                        <div class="step-content">
-                            <h3>Public Key Exchange</h3>
-                            <p>Clients exchange public keys through the relay server without exposing their private keys.</p>
-                        </div>
-                    </div>
+                <div id="login-section" class="chat-controls">
+                    <input type="text" id="username" placeholder="Choose a permanent username..." class="chat-input">
+                    <button onclick="enterChat()" class="btn btn-primary">Join Secure Chat</button>
+                </div>
 
-                    <!-- Step 3 -->
-                    <div class="flow-step">
-                        <div class="step-number">3</div>
-                        <div class="step-content">
-                            <h3>Shared Secret Derivation</h3>
-                            <p>Each client computes the shared secret independently using their private key and the other party's public key.</p>
-                        </div>
-                    </div>
-
-                    <!-- Step 4 -->
-                    <div class="flow-step">
-                        <div class="step-number">4</div>
-                        <div class="step-content">
-                            <h3>Session Key Generation</h3>
-                            <p>The shared secret is used to derive AES encryption keys and HMAC keys through a key derivation function.</p>
-                        </div>
-                    </div>
-
-                    <!-- Step 5 -->
-                    <div class="flow-step">
-                        <div class="step-number">5</div>
-                        <div class="step-content">
-                            <h3>Message Encryption</h3>
-                            <p>Messages are encrypted using AES-256 in CBC mode with a random initialization vector (IV) for each message.</p>
-                        </div>
-                    </div>
-
-                    <!-- Step 6 -->
-                    <div class="flow-step">
-                        <div class="step-number">6</div>
-                        <div class="step-content">
-                            <h3>HMAC Generation</h3>
-                            <p>An HMAC is computed over the encrypted message to ensure integrity and authenticity.</p>
-                        </div>
-                    </div>
-
-                    <!-- Step 7 -->
-                    <div class="flow-step">
-                        <div class="step-number">7</div>
-                        <div class="step-content">
-                            <h3>Relay Transmission</h3>
-                            <p>The encrypted message and HMAC are sent through the blind relay server which cannot decrypt the contents.</p>
-                        </div>
-                    </div>
-
-                    <!-- Step 8 -->
-                    <div class="flow-step">
-                        <div class="step-number">8</div>
-                        <div class="step-content">
-                            <h3>Verification & Decryption</h3>
-                            <p>The recipient verifies the HMAC, then decrypts the message using the shared session key.</p>
-                        </div>
+                <div id="chat-interface">
+                    <h3>Online Participants</h3>
+                    <ul id="onlineUsers" class="user-list">
+                        </ul>
+                    
+                    <div class="chat-footer-actions">
+                        <button onclick="resetDeviceIdentity()" class="btn-link">Reset Device Identity</button>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Screenshots Section -->
-    <section id="screenshots" class="screenshots">
-        <div class="container">
-            <div class="section-title-center">
-                <h2>Screenshots</h2>
-                <p>See the application in action</p>
-            </div>
-            <div class="card">
-                <div class="screenshots-grid">
-                    <!-- Screenshot 1 -->
-                    <div class="screenshot-item">
-                        <div class="screenshot-frame">
-                            <img src="../screenshots/initiator-handshake.png" alt="Client 1 Initiator Handshake" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                            <div class="screenshot-placeholder">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <circle cx="12" cy="12" r="3"></circle>
-                                    <path d="M12 1v6m0 6v6m5.2-13.2l-3.5 3.5m-3.5 3.5l-3.5 3.5m10.5 0l-3.5-3.5m-3.5-3.5l-3.5-3.5"></path>
-                                </svg>
-                                <p>Key Exchange Screenshot</p>
-                                <small>(Place image at ../screenshots/initiator-handshake.png)</small>
-                            </div>
-                        </div>
-                        <p class="screenshot-caption">Client 1 (Initiator) - Secure Handshake</p>
-                    </div>
-
-                    <!-- Screenshot 2 -->
-                    <div class="screenshot-item">
-                        <div class="screenshot-frame">
-                            <img src="../screenshots/responder-handshake.png" alt="Client 2 Responder Handshake" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                            <div class="screenshot-placeholder">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
-                                    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
-                                </svg>
-                                <p>Chat Interface Screenshot</p>
-                                <small>(Place image at ../screenshots/responder-handshake.png)</small>
-                            </div>
-                        </div>
-                        <p class="screenshot-caption">Client 2 (Responder) - Secure Handshake</p>
-                    </div>
-
-                    <!-- Screenshot 3 -->
-                    <div class="screenshot-item">
-                        <div class="screenshot-frame">
-                            <img src="../screenshots/server.png" alt="Blind Relay Server" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                            <div class="screenshot-placeholder">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect>
-                                    <rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect>
-                                    <line x1="6" y1="6" x2="6.01" y2="6"></line>
-                                    <line x1="6" y1="18" x2="6.01" y2="18"></line>
-                                </svg>
-                                <p>Server Relay Screenshot</p>
-                                <small>(Place image at ../screenshots/server.png)</small>
-                            </div>
-                        </div>
-                        <p class="screenshot-caption">Server Running on 127.0.0.1:5000</p>
-                    </div>
-
-                    <!-- Screenshot 4 -->
-                    <div class="screenshot-item">
-                        <div class="screenshot-frame">
-                            <img src="../screenshots/initiator-chat.png" alt="Initiator Sending Encrypted Messages" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                            <div class="screenshot-placeholder">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
-                                </svg>
-                                <p>Initiator Chat Screenshot</p>
-                                <small>(Place image at ../screenshots/initiator-chat.png)</small>
-                            </div>
-                        </div>
-                        <p class="screenshot-caption">Client 1 - Sending Encrypted Messages</p>
-                    </div>
-
-                    <!-- Screenshot 5 -->
-                    <div class="screenshot-item">
-                        <div class="screenshot-frame">
-                            <img src="../screenshots/responder-chat.png" alt="Responder Receiving Encrypted Messages" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                            <div class="screenshot-placeholder">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
-                                </svg>
-                                <p>Responder Chat Screenshot</p>
-                                <small>(Place image at ../screenshots/responder-chat.png)</small>
-                            </div>
-                        </div>
-                        <p class="screenshot-caption">Client 2 - Receiving Encrypted Messages</p>
-                    </div>
-                </div>
-
-                <div class="info-box">
-                    <p>💡 Add your screenshots to the <code>screenshots/</code> directory relative to your index.html file to display them here.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Technical Stack Section -->
     <section class="tech-stack">
         <div class="container">
-            <div class="card">
+            <div class="card reveal">
                 <h2 class="section-title-center-single">Technical Stack</h2>
                 <div class="tech-grid">
-                    <!-- Python -->
                     <div class="tech-item">
-                        <div class="tech-icon icon-cyan">
-                            <svg viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M14.25.18l.9.2.73.26.59.3.45.32.34.34.25.34.16.33.1.3.04.26.02.2-.01.13V8.5l-.05.63-.13.55-.21.46-.26.38-.3.31-.33.25-.35.19-.35.14-.33.1-.3.07-.26.04-.21.02H8.77l-.69.05-.59.14-.5.22-.41.27-.33.32-.27.35-.2.36-.15.37-.1.35-.07.32-.04.27-.02.21v3.06H3.17l-.21-.03-.28-.07-.32-.12-.35-.18-.36-.26-.36-.36-.35-.46-.32-.59-.28-.73-.21-.88-.14-1.05-.05-1.23.06-1.22.16-1.04.24-.87.32-.71.36-.57.4-.44.42-.33.42-.24.4-.16.36-.1.32-.05.24-.01h.16l.06.01h8.16v-.83H6.18l-.01-2.75-.02-.37.05-.34.11-.31.17-.28.25-.26.31-.23.38-.2.44-.18.51-.15.58-.12.64-.1.71-.06.77-.04.84-.02 1.27.05zm-6.3 1.98l-.23.33-.08.41.08.41.23.34.33.22.41.09.41-.09.33-.22.23-.34.08-.41-.08-.41-.23-.33-.33-.22-.41-.09-.41.09zm13.09 3.95l.28.06.32.12.35.18.36.27.36.35.35.47.32.59.28.73.21.88.14 1.04.05 1.23-.06 1.23-.16 1.04-.24.86-.32.71-.36.57-.4.45-.42.33-.42.24-.4.16-.36.09-.32.05-.24.02-.16-.01h-8.22v.82h5.84l.01 2.76.02.36-.05.34-.11.31-.17.29-.25.25-.31.24-.38.2-.44.17-.51.15-.58.13-.64.09-.71.07-.77.04-.84.01-1.27-.04-1.07-.14-.9-.2-.73-.25-.59-.3-.45-.33-.34-.34-.25-.34-.16-.33-.1-.3-.04-.25-.02-.2.01-.13v-5.34l.05-.64.13-.54.21-.46.26-.38.3-.32.33-.24.35-.2.35-.14.33-.1.3-.06.26-.04.21-.02.13-.01h5.84l.69-.05.59-.14.5-.21.41-.28.33-.32.27-.35.2-.36.15-.36.1-.35.07-.32.04-.28.02-.21V6.07h2.09l.14.01zm-6.47 14.25l-.23.33-.08.41.08.41.23.33.33.23.41.08.41-.08.33-.23.23-.33.08-.41-.08-.41-.23-.33-.33-.23-.41-.08-.41.08z"/>
-                            </svg>
-                        </div>
+                        <div class="tech-icon icon-cyan">🐍</div>
                         <h3>Python</h3>
-                        <p>Core backend language</p>
+                        <p>Core backend</p>
                     </div>
-
-                    <!-- Cryptography -->
                     <div class="tech-item">
-                        <div class="tech-icon icon-purple">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
-                                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
-                            </svg>
-                        </div>
-                        <h3>Cryptography Library</h3>
-                        <p>Encryption implementation</p>
+                        <div class="tech-icon icon-purple">🔐</div>
+                        <h3>Cryptography</h3>
+                        <p>AES/DH Implementation</p>
                     </div>
-
-                    <!-- Socket Programming -->
                     <div class="tech-item">
-                        <div class="tech-icon icon-green">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect>
-                                <rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect>
-                                <line x1="6" y1="6" x2="6.01" y2="6"></line>
-                                <line x1="6" y1="18" x2="6.01" y2="18"></line>
-                            </svg>
-                        </div>
-                        <h3>Socket Programming</h3>
-                        <p>Real-time communication</p>
+                        <div class="tech-icon icon-green">🌐</div>
+                        <h3>WebSockets</h3>
+                        <p>Real-time relay</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-<section class="chat-section">
-    <div class="container">
 
-        <h2>Enter Real Chat</h2>
-
-        <input id="username" placeholder="Enter username">
-        <button onclick="enterChat()">Enter Chat</button>
-
-        <h3>Online Users</h3>
-        <ul id="onlineUsers"></ul>
-
-        <div class="chat-controls">
-            <button onclick="setBusy()">Set Busy</button>
-            <button onclick="setAvailable()">Set Available</button>
-        </div>
-
-    </div>
-</section>
-    <!-- Footer -->
     <footer class="footer">
         <div class="container footer-content">
             <div class="footer-brand">
@@ -414,10 +196,7 @@
                 </svg>
                 <span>Secure Chat Application © 2026</span>
             </div>
-            <a href="https://github.com/bajajaditi1910-design/secure-chat-app" target="_blank" rel="noopener noreferrer" class="footer-link">
-                <svg class="github-icon" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-                </svg>
+            <a href="https://github.com/bajajaditi1910-design/secure-chat-app" target="_blank" class="footer-link">
                 View Source Code
             </a>
         </div>

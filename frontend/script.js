@@ -96,26 +96,35 @@ socket.onmessage = (event) => {
 function enterChat() {
     const usernameInput = document.getElementById("username").value.trim();
 
+    // 1. Check if name is empty
     if (!usernameInput) {
-        alert("Enter a username");
+        alert("Please enter a username");
+        return;
+    }
+
+    // 2. CRITICAL CHECK: Is the server actually connected?
+    if (socket.readyState !== WebSocket.OPEN) {
+        alert("Connecting to secure server... Please wait 5 seconds and try again.");
+        
+        // If it's closed, try to reconnect
+        if (socket.readyState === WebSocket.CLOSED) {
+            location.reload(); 
+        }
         return;
     }
 
     const deviceUser = localStorage.getItem(DEVICE_USER_KEY);
 
-    // If this device already has a different name, prevent changing it
     if (deviceUser && deviceUser !== usernameInput) {
         alert("This device is already registered as: " + deviceUser);
         return;
     }
 
-    // Send login request to the server to check for global duplicates
     socket.send(JSON.stringify({
         type: "login",
         username: usernameInput
     }));
 }
-
 // ============================================
 // ONLINE USERS DISPLAY (UI)
 // ============================================

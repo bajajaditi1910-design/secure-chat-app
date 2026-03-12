@@ -49,7 +49,7 @@ function initNavbarScroll() {
 // ============================================
 
 // UPDATE: When you deploy to Render, change 'ws://localhost:8000' to 'wss://your-app.onrender.com'
-const socket = new WebSocket('ws://localhost:8000'); 
+const socket = new WebSocket('wss://secure-chat-app-eagy.onrender.com');
 const DEVICE_USER_KEY = "securechat_device_user";
 
 let myUsername = localStorage.getItem(DEVICE_USER_KEY);
